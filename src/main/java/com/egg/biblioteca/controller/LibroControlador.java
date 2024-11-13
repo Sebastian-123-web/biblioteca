@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,17 +29,19 @@ public class LibroControlador {
     @Autowired
     private EditorialServicio editorialServicio;
 
-    @RequestMapping("/registrar")
+    @GetMapping("/registrar")
     public String registrar() {
         return "libro_form.html";
     }
 
-    @PostMapping("/regitro")
-    public String regitro(@RequestParam(required = false) Long isbn, @RequestParam String titulo, @RequestParam(required = false) Integer ejemplar, @RequestParam String idAutor, @RequestParam String idEditorial) {
+    @PostMapping("/registro")
+    public String regitro(@RequestParam(required = false) Long isbn, @RequestParam String titulo, @RequestParam(required = false) Integer ejemplares, @RequestParam String idAutor, @RequestParam String idEditorial, ModelMap modelo) {
         try {
-            libroServicio.crearLibro(isbn, titulo, ejemplar, idAutor, idEditorial);
+            libroServicio.crearLibro(isbn, titulo, ejemplares, idAutor, idEditorial);
+            modelo.put("exito", "El Libro fue registrado exitosamente");
         } catch (MiException e) {
-            Logger.getLogger(EditorialControlador.class.getName()).log(Level.SEVERE, null, e);
+            // Logger.getLogger(EditorialControlador.class.getName()).log(Level.SEVERE, null, e);
+            modelo.put("error", e.getMessage());
             return "libro_form.html";
         }
         return "index.html";
