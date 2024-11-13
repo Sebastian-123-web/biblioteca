@@ -1,5 +1,6 @@
 package com.egg.biblioteca.controller;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.egg.biblioteca.entity.Autor;
 import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.services.AutorServicio;
 
@@ -38,4 +40,13 @@ public class AutorControlador {
         }
         return "index.html";
     }
+
+    @GetMapping("/lista")
+    public String listar(ModelMap modelMap){
+        System.out.println("hola si ingreso");
+        List<Autor> autores = autorServicio.listarAutor();
+        modelMap.addAttribute("autor",autores);
+        return "autor_list.html";
+    }
+
 }

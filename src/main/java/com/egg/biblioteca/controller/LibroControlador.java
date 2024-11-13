@@ -1,5 +1,6 @@
 package com.egg.biblioteca.controller;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.egg.biblioteca.entity.Autor;
+import com.egg.biblioteca.entity.Editorial;
 import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.services.AutorServicio;
 import com.egg.biblioteca.services.EditorialServicio;
@@ -30,7 +33,11 @@ public class LibroControlador {
     private EditorialServicio editorialServicio;
 
     @GetMapping("/registrar")
-    public String registrar() {
+    public String registrar(ModelMap modelMap) {
+        List<Autor> autores = autorServicio.listarAutor();
+        List<Editorial> editoriales = editorialServicio.listarEditorial();
+        modelMap.addAttribute("autores",autores);
+        modelMap.addAttribute("editoriales",editoriales);
         return "libro_form.html";
     }
 
