@@ -45,7 +45,7 @@ public class AutorControlador {
     public String listar(ModelMap modelMap){
         System.out.println("hola si ingreso");
         List<Autor> autores = autorServicio.listarAutor();
-        modelMap.addAttribute("autor",autores);
+        modelMap.addAttribute("autores",autores);
         return "autor_list.html";
     }
 

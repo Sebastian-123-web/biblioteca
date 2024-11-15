@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.egg.biblioteca.entity.Autor;
 import com.egg.biblioteca.entity.Editorial;
+import com.egg.biblioteca.entity.Libro;
 import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.services.AutorServicio;
 import com.egg.biblioteca.services.EditorialServicio;
@@ -44,13 +45,21 @@ public class LibroControlador {
     @PostMapping("/registro")
     public String regitro(@RequestParam(required = false) Long isbn, @RequestParam String titulo, @RequestParam(required = false) Integer ejemplares, @RequestParam String idAutor, @RequestParam String idEditorial, ModelMap modelo) {
         try {
+            System.out.println(isbn);
             libroServicio.crearLibro(isbn, titulo, ejemplares, idAutor, idEditorial);
             modelo.put("exito", "El Libro fue registrado exitosamente");
         } catch (MiException e) {
-            // Logger.getLogger(EditorialControlador.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(LibroControlador.class.getName()).log(Level.SEVERE, null, e);
             modelo.put("error", e.getMessage());
             return "libro_form.html";
         }
         return "index.html";
+    }
+
+    @GetMapping("/lista")
+    public String listar(ModelMap modelMap){
+        List<Libro> libros = libroServicio.listarLibros();
+        modelMap.addAttribute("libros",libros);
+        return "libro_list.html";
     }
 }

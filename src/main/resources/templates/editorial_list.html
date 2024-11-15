@@ -75,18 +75,18 @@
             <table class="table table-dark">
                 <thead>
                     <tr>
-                        <th scope="col">Id del Autor</th>
-                        <th scope="col">Nombre del Autor</th>
+                        <th scope="col">Id del Editorial</th>
+                        <th scope="col">Nombre del Editorial</th>
                         <th scope="col">Acciones</th>
 
                     </tr>
                 </thead>
-                <tbody th:each="autor : ${autores}"> 
+                <tbody th:each="editorial : ${editoriales}"> 
                     <tr>
-                        <th scope="row" th:text="${autor.id}">
-                        <th th:text="${autor.nombre}">
+                        <th scope="row" th:text="${editorial.id}">
+                        <th th:text="${editorial.nombre}">
                         <td>
-                            <a th:href= "@{/autor/modificar/__${autor.id}__}"><i class="fas fa-feather-alt">  </i> Modificar </a>
+                            <a th:href= "@{/editorial/modificar/__${editorial.id}__}"><i class="fas fa-feather-alt">  </i> Modificar </a>
                         </td>
 
                     </tr>

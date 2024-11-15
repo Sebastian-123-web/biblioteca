@@ -30,7 +30,7 @@ public class LibroServicio {
     
     @Transactional
     public void crearLibro(Long isbn,String titulo, Integer ejemplares, String idAutor, String idEditorial) throws MiException {
-        validar(null, titulo, ejemplares, idAutor, idEditorial);
+        validar(isbn, titulo, ejemplares, idAutor, idEditorial);
 
         Libro libro = new Libro();
 

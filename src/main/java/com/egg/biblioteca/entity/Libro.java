@@ -79,4 +79,8 @@ public class Libro {
         this.editorial = editorial;
     }
     
+    @Override
+    public String toString() {
+        return "Libro [isbn=" + isbn + ", titulo=" + titulo + ", ejemplares=" + ejemplares + ", alta=" + alta + ", autor=" + autor + ", editorial=" + editorial + "]";
+    }
 }

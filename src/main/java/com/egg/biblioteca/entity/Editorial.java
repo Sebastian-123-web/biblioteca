@@ -1,6 +1,6 @@
 package com.egg.biblioteca.entity;
 
-import java.util.UUID;
+import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,7 +11,8 @@ import jakarta.persistence.Id;
 public class Editorial {
     @Id
     @GeneratedValue(generator = "uuid")
-    private UUID id;
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
 
     @Column(name = "nombre")
     private String nombre;
@@ -19,11 +20,11 @@ public class Editorial {
     public Editorial() {
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -33,5 +34,10 @@ public class Editorial {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "Editorial [id=" + id + ", nombre=" + nombre + "]";
     }
 }

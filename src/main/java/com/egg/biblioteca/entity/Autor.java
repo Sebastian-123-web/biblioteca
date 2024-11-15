@@ -1,18 +1,18 @@
 package com.egg.biblioteca.entity;
 
-import java.util.UUID;
+import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Autor {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
 
     @Column(name = "nombre")
     private String nombre;
@@ -20,11 +20,11 @@ public class Autor {
     public Autor() {
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -36,4 +36,8 @@ public class Autor {
         this.nombre = nombre;
     }
     
+    @Override
+    public String toString() {
+        return "Autor [id=" + id + ", nombre=" + nombre + "]";
+    }
 }
