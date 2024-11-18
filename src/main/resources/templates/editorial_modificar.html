@@ -65,7 +65,7 @@
           </nav>
         <div class="container-fluid m-5 contenedor">
 
-            <form class="formulario" th:action="@{/editorial/modificar/__${autor.id}__}" method="POST">
+            <form class="formulario" th:action="@{/editorial/modificar/__${editorial.id}__}" method="POST">
                 <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
                     <div class="card-body">
                         <h5 class="card-title">Exito!</h5>
@@ -79,7 +79,7 @@
                     </div>
                 </div>
 
-                <input hidden type="text" name="id" th:value="${autor.id}">
+                <input hidden type="text" name="id" th:value="${editorial.id}">
                 <div class="form-group my-3">
                     <label class="mb-2">Cargar Editorial</label>
                     <input type="text" name="nombre" class="form-control" th:value="${editorial.nombre}"  placeholder="Nombre del Editorial">
