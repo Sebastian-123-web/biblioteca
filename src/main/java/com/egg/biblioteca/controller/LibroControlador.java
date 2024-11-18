@@ -43,7 +43,7 @@ public class LibroControlador {
     }
 
     @PostMapping("/registro")
-    public String regitro(@RequestParam(required = false) Long isbn, @RequestParam String titulo, @RequestParam(required = false) Integer ejemplares, @RequestParam String idAutor, @RequestParam String idEditorial, ModelMap modelo) {
+    public String regitro(Long isbn, @RequestParam String titulo, @RequestParam(required = false) Integer ejemplares, @RequestParam String idAutor, @RequestParam String idEditorial, ModelMap modelo) {
         try {
             System.out.println(isbn);
             libroServicio.crearLibro(isbn, titulo, ejemplares, idAutor, idEditorial);

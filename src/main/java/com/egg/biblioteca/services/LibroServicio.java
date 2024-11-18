@@ -37,6 +37,7 @@ public class LibroServicio {
         Autor autor = autorRepositorio.findById(idAutor).get();
         Editorial editorial = editorialRepositorio.findById(idEditorial).get();
 
+        libro.setIsbn(isbn);
         libro.setTitulo(titulo);
         libro.setEjemplares(ejemplares);
         libro.setAlta(new Date());
