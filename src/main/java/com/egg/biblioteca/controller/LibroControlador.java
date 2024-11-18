@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,5 +62,27 @@ public class LibroControlador {
         List<Libro> libros = libroServicio.listarLibros();
         modelMap.addAttribute("libros",libros);
         return "libro_list.html";
+    }
+
+    @GetMapping("/modificar/{isbn}")
+    public String modificar(@PathVariable Long isbn, ModelMap modelMap) {
+        List<Autor> autores = autorServicio.listarAutor();
+        List<Editorial> editoriales = editorialServicio.listarEditorial();
+        modelMap.addAttribute("autores", autores);
+        modelMap.addAttribute("editoriales",editoriales);
+
+        modelMap.put("libro", libroServicio.getOneLibro(isbn));
+        return "libro_modificar.html";
+    }
+
+    @PostMapping("/modificar/{isbn}")
+    public String modificar(@PathVariable Long isbn, String titulo, Integer ejemplares, String idAutor, String idEditorial, ModelMap modelMap) {
+        try {
+            libroServicio.modificarLibro(isbn, titulo, ejemplares, idAutor, idEditorial);
+            return "redirect:../lista";
+        } catch (MiException e) {
+            modelMap.put("error", e.getMessage());
+            return "editorial_modificar.html";
+        }
     }
 }

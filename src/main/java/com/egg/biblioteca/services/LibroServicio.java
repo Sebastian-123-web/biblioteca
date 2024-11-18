@@ -84,6 +84,12 @@ public class LibroServicio {
         }
     }
 
+    // BUSCAR REGISTRO POR ID
+    @Transactional
+    public Libro getOneLibro(Long isbn) {
+        return libroRepositorio.getReferenceById(isbn);
+    }
+
     // VALIDAR LOS PARAMETOS DE LOS METODOS
     public void validar(Long isbn, String titulo, Integer ejemplares, String idAutor, String idEditorial) throws MiException {
         if (isbn == null) {

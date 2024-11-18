@@ -55,4 +55,10 @@ public class EditorialServicio {
             throw new MiException("El nombre no puede ser nulo o vacio");
         }
     }
+
+    // BUSCANDO UN REGISTRO POR ID
+    @Transactional(readOnly = true)
+    public Editorial getOnEditorial(String id) {
+        return editorialRepositorio.getReferenceById(id);
+    }
 }

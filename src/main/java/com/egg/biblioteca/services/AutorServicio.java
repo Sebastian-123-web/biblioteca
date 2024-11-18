@@ -55,4 +55,10 @@ public class AutorServicio {
             throw new MiException("El nombre no puede ser nulo o vacio");
         }
     }
+
+    // BUSCAR UN REGISTRO POR ID
+    @Transactional(readOnly = true)
+    public Autor getOneAutor(String id) {
+        return autorRepositorio.getReferenceById(id);
+    }
 }
